@@ -9,11 +9,22 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
-    private Long user_attribute_id;
+    @Column(nullable = false)
+    private Integer age;
+    @Column(nullable = false)
+    private String gender;
+    @Column(nullable = false)
+    private String country;
+    @Column(nullable = false)
+    private String city;
+    @Column(nullable = false)
+    private String zip_code;
 
     //getters and setters
     public Long getId() {
@@ -43,11 +54,39 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public Long getUser_attribute_id() {
-        return user_attribute_id;
+
+    public Integer getAge() {
+        return age;
     }
-    public void setUser_attribute_id(Long user_attribute_id) {
-        this.user_attribute_id = user_attribute_id;
-    }    
+    public void setAge(Integer age) {
+        this.age = age;
+    } 
+
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZip_code() {
+        return zip_code;
+    }
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
 }

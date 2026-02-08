@@ -36,6 +36,11 @@ public class UserService {
         newUser.setEmail(dto.email());
         newUser.setPassword(encryptedPassword);
         newUser.setName(dto.name());
+        newUser.setAge(dto.age());
+        newUser.setGender(dto.gender());
+        newUser.setCountry(dto.country());
+        newUser.setCity(dto.city());
+        newUser.setZip_code(dto.zip_code());
 
         return repository.save(newUser);
     }
@@ -43,7 +48,7 @@ public class UserService {
     public User loginUser(UserLoginDTO dto) {
         // checking if the email exists
         if (!repository.findByEmail(dto.email()).isPresent()) {
-            throw new RuntimeException("email not found");
+            throw new RuntimeException("invalid credentials");
         }
 
         User user = repository.findByEmail(dto.email()).orElseThrow(() -> new RuntimeException("invalid credentials"));
