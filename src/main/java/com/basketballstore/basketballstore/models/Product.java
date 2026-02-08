@@ -9,11 +9,16 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private Double price;
-    private Boolean availability;
+    private Boolean availability = true;
+    @Column(nullable = false)
     private Double quantity;
+    @Column(nullable = false)
     private Long category_id;
+    @Column(nullable = false)
     private Long brand_id;
 
     //getters and setters

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 // importing layers
 import com.basketballstore.basketballstore.dto.UserRegistrationDTO;
@@ -17,8 +18,6 @@ import com.basketballstore.basketballstore.dto.UserLoginDTO;
 import com.basketballstore.basketballstore.models.User;
 import com.basketballstore.basketballstore.repositories.UserRepository;
 import com.basketballstore.basketballstore.services.UserService;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/users") // base route: localhost:8080/users
