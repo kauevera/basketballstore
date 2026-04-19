@@ -24,7 +24,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)
-    private String zip_code;
+    private String zipCode;
 
     //getters and setters
     public Long getId() {
@@ -83,10 +83,10 @@ public class User implements Serializable {
         this.city = city;
     }
 
-    public String getZip_code() {
-        return zip_code;
+    public String getzipCode() {
+        return zipCode;
     }
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setzipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }

@@ -20,7 +20,7 @@ public class UserService {
 
     public User registerUser(UserRegistrationDTO dto) {
         // checking if the passwords matches
-        if (!dto.password().equals(dto.confirm_password())) {
+        if (!dto.password().equals(dto.confirmPassword())) {
             throw new RuntimeException("the passwords don't match");
         }
 
@@ -40,7 +40,7 @@ public class UserService {
         newUser.setGender(dto.gender());
         newUser.setCountry(dto.country());
         newUser.setCity(dto.city());
-        newUser.setZip_code(dto.zip_code());
+        newUser.setzipCode(dto.zipCode());
 
         return repository.save(newUser);
     }

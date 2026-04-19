@@ -12,14 +12,14 @@ public class Order implements Serializable {
     private Long id;
     private String state = "awaiting payment";
     @Column(updatable = false)
-    private LocalDateTime creation_date = LocalDateTime.now();;
-    private LocalDateTime estimated_delivery_date = null;
-    private LocalDateTime real_delivery_date = null;
+    private LocalDateTime creationDate = LocalDateTime.now();;
+    private LocalDateTime estimatedDeliveryDate = null;
+    private LocalDateTime realDeliveryDate = null;
     @Column(nullable = false, updatable = false)
-    private Long user_id;
+    private Long userId;
     @Column(nullable = false, updatable = false)
-    private Long product_id;
-    private Long transaction_id = null;
+    private Long productId;
+    private Long transactionId = null;
     @Column(nullable = false)
     private Long paymentMethodId;
 
@@ -36,41 +36,41 @@ public class Order implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-    public LocalDateTime getCreation_date() {
-        return creation_date;
+    public LocalDateTime getcreationDate() {
+        return creationDate;
     }
-    public void setCreation_date(LocalDateTime creation_date) {
-        this.creation_date = creation_date;
+    public void setcreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
-    public LocalDateTime getEstimated_delivery_date() {
-        return estimated_delivery_date;
+    public LocalDateTime getestimatedDeliveryDate() {
+        return estimatedDeliveryDate;
     }
-    public void setEstimated_delivery_date(LocalDateTime estimated_delivery_date) {
-        this.estimated_delivery_date = estimated_delivery_date;
+    public void setestimatedDeliveryDate(LocalDateTime estimatedDeliveryDate) {
+        this.estimatedDeliveryDate = estimatedDeliveryDate;
     }
-    public LocalDateTime getReal_delivery_date() {
-        return real_delivery_date;
+    public LocalDateTime getrealDeliveryDate() {
+        return realDeliveryDate;
     }
-    public void setReal_delivery_date(LocalDateTime real_delivery_date) {
-        this.real_delivery_date = real_delivery_date;
+    public void setrealDeliveryDate(LocalDateTime realDeliveryDate) {
+        this.realDeliveryDate = realDeliveryDate;
     }
-    public Long getUser_id() {
-        return user_id;
+    public Long getuserId() {
+        return userId;
     }
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setuserId(Long userId) {
+        this.userId = userId;
     }
-    public Long getProduct_id() {
-        return product_id;
+    public Long getproductId() {
+        return productId;
     }
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public void setproductId(Long productId) {
+        this.productId = productId;
     }
-    public Long getTransaction_id() {
-        return transaction_id;
+    public Long gettransactionId() {
+        return transactionId;
     }
-    public void setTransaction_id(Long transaction_id) {
-        this.transaction_id = transaction_id;
+    public void settransactionId(Long transactionId) {
+        this.transactionId = transactionId;
     }
     public Long getpaymentMethodId() {
         return paymentMethodId;

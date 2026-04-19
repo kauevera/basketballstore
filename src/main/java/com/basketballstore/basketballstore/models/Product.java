@@ -17,9 +17,9 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Double quantity;
     @Column(nullable = false)
-    private Long category_id;
+    private Long categoryId;
     @Column(nullable = false)
-    private Long brand_id;
+    private Long brandId;
 
     //getters and setters
     public Long getId() {
@@ -52,16 +52,16 @@ public class Product implements Serializable {
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
-    public Long getCategory_id() {
-        return category_id;
+    public Long getcategoryId() {
+        return categoryId;
     }
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
+    public void setcategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
-    public Long getBrand_id() {
-        return brand_id;
+    public Long getbrandId() {
+        return brandId;
     }
-    public void setBrand_id(Long brand_id) {
-        this.brand_id = brand_id;
+    public void setbrandId(Long brandId) {
+        this.brandId = brandId;
     }
 }

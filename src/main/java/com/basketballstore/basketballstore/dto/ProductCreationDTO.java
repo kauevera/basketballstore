@@ -13,9 +13,9 @@ public record ProductCreationDTO (
     @NotNull(message = "this field is required.")
     Double quantity,
     @NotNull(message = "this field is required.")
-    Long category_id,
+    Long categoryId,
     @NotNull(message = "this field is required.")
-    Long brand_id
+    Long brandId
 ){
 
 }

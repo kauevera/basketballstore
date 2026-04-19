@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotNull;
 
 public record OrderCreationDTO (
     @NotNull(message = "this field is required.")
-    Long product_id,
+    Long productId,
     @NotNull(message = "this field is required.")
-    Long user_id,
+    Long userId,
     @NotNull(message = "this field is required.")
     Long paymentMethodId
 ){

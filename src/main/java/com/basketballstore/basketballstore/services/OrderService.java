@@ -18,22 +18,22 @@ public class OrderService {
     @Autowired
     private OrderRepository repository;
     @Autowired
-    private UserRepository user_repository;
+    private UserRepository userRepository;
     @Autowired
-    private ProductRepository product_repository;
+    private ProductRepository productRepository;
     @Autowired
-    private TransactionRepository transaction_repository;
+    private TransactionRepository transactionRepository;
     @Autowired
-    private PaymentMethodRepository payment_method_repository;
+    private PaymentMethodRepository paymentMethodRepository;
 
 
     public Order createOrder(OrderCreationDTO dto) {
-        // checking if the user_id exists
-        if (!user_repository.findById(dto.user_id()).isPresent()){
-            throw new RuntimeException("invalid user_id");
+        // checking if the userId exists
+        if (!userRepository.findById(dto.userId()).isPresent()){
+            throw new RuntimeException("invalid userId");
         }
 
-        Product product = product_repository.findById(dto.product_id()).orElseThrow(() -> new RuntimeException("invalid product"));
+        Product product = productRepository.findById(dto.productId()).orElseThrow(() -> new RuntimeException("invalid product"));
 
         // checking if the product is in stock
         if ((product.getQuantity() < 1) || (product.getAvailability() == false)) {
@@ -41,22 +41,22 @@ public class OrderService {
         }
 
         // checking the paymentMethodId
-        if (!payment_method_repository.findById(dto.paymentMethodId()).isPresent()) {
+        if (!paymentMethodRepository.findById(dto.paymentMethodId()).isPresent()) {
             throw new RuntimeException("this payment method is not accepted");
         }
 
         Order newOrder = new Order();
-        newOrder.setUser_id(dto.user_id());
-        newOrder.setProduct_id(dto.product_id());
+        newOrder.setuserId(dto.userId());
+        newOrder.setproductId(dto.productId());
         newOrder.setpaymentMethodId(dto.paymentMethodId());
         repository.save(newOrder);
    
         Transaction newTransaction = new Transaction();
-        newTransaction.setOrder_id(newOrder.getId());
+        newTransaction.setorderId(newOrder.getId());
         newTransaction.setpaymentMethodId(newOrder.getpaymentMethodId());
-        transaction_repository.save(newTransaction);
+        transactionRepository.save(newTransaction);
 
-        newOrder.setTransaction_id(newTransaction.getId());
+        newOrder.settransactionId(newTransaction.getId());
 
         return repository.save(newOrder);
     }

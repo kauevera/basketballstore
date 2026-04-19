@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 public record UserRegistrationDTO (
     @Email String email,
     @Size(min = 8, message = "the password must be at least 8 characters long.") String password,
-    String confirm_password,
+    String confirmPassword,
     @NotBlank(message = "this field is required.")
     String name,
     @NotNull(message = "this field is required.")
@@ -20,7 +20,7 @@ public record UserRegistrationDTO (
     @NotBlank(message = "this field is required.")
     String city,
     @NotBlank(message = "this field is required.")
-    String zip_code
+    String zipCode
 ){
 
 }

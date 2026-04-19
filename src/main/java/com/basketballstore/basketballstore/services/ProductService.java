@@ -16,18 +16,18 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
     @Autowired
-    private BrandRepository brand_repository;
+    private BrandRepository brandRepository;
     @Autowired
-    private CategoryRepository category_repository;
+    private CategoryRepository categoryRepository;
     
     public Product createProduct(ProductCreationDTO dto) {
         // checking if the brand exists
-        if (!brand_repository.findById(dto.brand_id()).isPresent()) {
+        if (!brandRepository.findById(dto.brandId()).isPresent()) {
             throw new RuntimeException("please provide a valid brand");
         }
 
         // checking if the category exists
-        if (!category_repository.findById(dto.category_id()).isPresent()) {
+        if (!categoryRepository.findById(dto.categoryId()).isPresent()) {
             throw new RuntimeException("please provide a valid category");
         }
 
@@ -36,8 +36,8 @@ public class ProductService {
         newProduct.setPrice(dto.price());
         newProduct.setAvailability(dto.availability());
         newProduct.setQuantity(dto.quantity());
-        newProduct.setCategory_id(dto.category_id());
-        newProduct.setBrand_id(dto.brand_id());
+        newProduct.setcategoryId(dto.categoryId());
+        newProduct.setbrandId(dto.brandId());
  
         return repository.save(newProduct);
     }
@@ -55,8 +55,8 @@ public class ProductService {
         if (dto.price() != null) product.setPrice(dto.price());
         if (dto.availability() != null) product.setAvailability(dto.availability());
         if (dto.quantity() != null) product.setQuantity(dto.quantity());
-        if (dto.category_id() != null) product.setCategory_id(dto.category_id());
-        if (dto.brand_id() != null) product.setBrand_id(dto.brand_id());
+        if (dto.categoryId() != null) product.setcategoryId(dto.categoryId());
+        if (dto.brandId() != null) product.setbrandId(dto.brandId());
 
         return repository.save(product);
     }
