@@ -15,7 +15,9 @@ import com.basketballstore.basketballstore.repositories.ProductRepository;
 public class ProductService {
     @Autowired
     private ProductRepository repository;
+    @Autowired
     private BrandRepository brand_repository;
+    @Autowired
     private CategoryRepository category_repository;
     
     public Product createProduct(ProductCreationDTO dto) {
