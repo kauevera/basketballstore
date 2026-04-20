@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="stylesheet" href="../../static/css/auth/auth.css">
+    <title>Basketball Store - Home</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div id="left-nav-bar">
+            <button type="button" class="nav-btn" onclick="redirectDashboard()">Tela inicial</button>
+        </div>
+        <div id="right-nav-bar">
+            <button type="button" class="nav-btn" onclick="redirectLogin()">Meus pedidos</button>
+            <button type="button" class="nav-btn" onclick="redirectLogin()">Entrar ou cadastrar</button>
+        </div>        
+    </nav>
+    <div class="content">
+        <div class="form-container">
+            <div class="form-title">
+                <h3>Bem vindo de volta</h3>
+                <p>Entre com sua conta</p>
+            </div>
+            <div class="form-fields">
+                <div class="form-input">
+                    <label>Email</label>
+                    <input type=email id="email" title="email" placeholder="Email">
+                </div>
+                <div class="form-input">
+                    <label>Senha</label>
+                    <input type=password id="password" title="password" placeholder="Senha">
+                </div>
+            </div>
+            <div class="form-submit">
+                <button type="button" class="nav-btn" onclick="redirectLogin()">Acessar conta</button>
+            </div>
+        </div>
+    </div>    
+</body>
+<script src="../../static/js/pages_redirect.js"></script>
+</html>
