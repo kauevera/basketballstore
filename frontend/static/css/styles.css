@@ -9,7 +9,7 @@ body, button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 0px 20px;
+    margin: 20px 20px 0px 20px;
 }
 
 #right-nav-bar {
@@ -38,4 +38,9 @@ body, button {
 .nav-btn:hover {
   background-color: #E8EDF2;
   cursor: pointer;
+}
+
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.089);
+  margin: 15px 20px 25px 20px; 
 }

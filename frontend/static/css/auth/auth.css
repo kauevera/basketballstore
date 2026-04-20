@@ -1,4 +1,6 @@
 .content {
+    height: 100%;
+    margin-top: 8%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,6 +48,10 @@
 
 .form-title {
     margin-top: 20px;
+}
+
+.form-title h3, .form-title p {
+    margin: 5px 0;
 }
 
 .form-submit {
