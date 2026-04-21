@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="stylesheet" href="../../static/css/auth/auth.css">
+    <title>Basketball Store - Home</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div id="left-nav-bar">
+            <button type="button" class="nav-btn" onclick="redirectDashboard()">Tela inicial</button>
+        </div>
+        <div id="right-nav-bar">
+            <button type="button" class="nav-btn" onclick="redirectLogin()">Meus pedidos</button>
+            <button type="button" class="nav-btn" onclick="redirectLogin()">Entrar ou cadastrar</button>
+        </div>
+    </nav>
+    <hr>
+    <div class="content">
+        <div class="form-container">
+            <div class="form-title">
+                <h3>Seja bem vindo</h3>
+                <p>Crie uma conta</p>
+            </div>
+            <div class="form-fields">
+                <div class="form-input">
+                    <label>Nome</label>
+                    <input type=text id="name" title="name" placeholder="Digite o seu nome">
+                </div>
+                <div class="form-input">
+                    <label>Idade</label>
+                    <input type=number id="age" title="age" placeholder="Digite a sua idade">
+                </div>
+                <div class="form-input">
+                    <label>Gênero</label>
+                    <input type=text id="gender" title="gender" placeholder="Selecione o seu gênero">
+                </div>
+                <div class="form-input">
+                    <label>Email</label>
+                    <input type=email id="email" title="email" placeholder="Email">
+                </div>
+                <div class="form-input">
+                    <label>Senha</label>
+                    <input type=password id="password" title="password" placeholder="***********">
+                </div>
+                <div class="form-input">
+                    <label>Confirmar Senha</label>
+                    <input type=password id="password" title="password" placeholder="***********">
+                </div>
+            </div>
+            <div class="form-submit">
+                <button type="button" class="request-btn" onclick="redirectRegister()">Criar conta</button>
+                <button type="button" class="form-btn" onclick="redirectLogin()">Clique aqui caso já tenha uma conta</button>
+            </div>
+        </div>
+    </div>    
+</body>
+<script src="../../static/js/pages_redirect.js"></script>
+</html>
