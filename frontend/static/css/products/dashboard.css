@@ -53,9 +53,16 @@
     margin: 20px;
 }
 
-.products-grid {
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+#products-grid {
     display: inline-grid;
-    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-columns: 300px 300px 300px 300px;
     justify-content: center;
     gap: 20px 20px;
 }
