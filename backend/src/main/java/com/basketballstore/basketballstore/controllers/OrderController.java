@@ -26,6 +26,11 @@ public class OrderController {
         return repository.findAll();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Order> listByUser(@PathVariable Long userId) {
+        return repository.findByUserId(userId);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody @Valid OrderCreationDTO data) {
         try {
@@ -35,5 +40,4 @@ public class OrderController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
 }

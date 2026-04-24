@@ -19,6 +19,8 @@ async function login() {
 
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("userEmail", data.email);
         redirectDashboard();
     } catch (error) {
         alert("Erro ao conectar com o servidor.");
@@ -55,11 +57,22 @@ async function register() {
 
 function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("cart");
     redirectLogin();
 }
 
 function getToken() {
     return localStorage.getItem("token");
+}
+
+function getUserId() {
+    return parseInt(localStorage.getItem("userId"));
+}
+
+function getUserEmail() {
+    return localStorage.getItem("userEmail");
 }
 
 function isAuthenticated() {
