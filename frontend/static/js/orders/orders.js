@@ -89,7 +89,12 @@ function buildOrderCard(order) {
             <span class="order-payment">${order.paymentMethodTitle}</span>
         </div>
         <div class="order-date">${order.creationDate}</div>
-        ${order.state === "awaiting_payment" ? `<button class="pay-btn" onclick="openPaymentModal(${order.id})">Realizar pagamento</button>` : ""}
+        ${order.state === "awaiting_payment" ? `
+            <div class="order-actions">
+                <button class="pay-btn" onclick="openPaymentModal(${order.id})">Realizar pagamento</button>
+                <button class="cancel-btn" onclick="cancelOrder(${order.id})">Cancelar pedido</button>
+            </div>
+        ` : ""}
     `;
 
     return card;
@@ -123,6 +128,25 @@ function openPaymentModal(orderId) {
 function closePaymentModal() {
     document.getElementById("payment-modal").classList.remove("open");
     pendingPayOrderId = null;
+}
+
+async function cancelOrder(orderId) {
+    try {
+        const response = await fetch(`${API_BASE}/orders/${orderId}/cancel`, {
+            method: "PATCH",
+            headers: { Authorization: `Bearer ${getToken()}` }
+        });
+
+        if (!response.ok) {
+            const msg = await response.text();
+            alert("Erro: " + msg);
+            return;
+        }
+
+        await loadOrders();
+    } catch {
+        alert("Erro ao cancelar pedido.");
+    }
 }
 
 async function confirmPayment() {

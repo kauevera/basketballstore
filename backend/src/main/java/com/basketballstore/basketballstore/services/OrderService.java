@@ -100,4 +100,12 @@ public class OrderService {
 
         return order;
     }
+
+    public Order cancelOrder(Long orderId) {
+        Order order = repository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("order not found"));
+
+        order.setState("canceled");
+        return repository.save(order);
+    }
 }

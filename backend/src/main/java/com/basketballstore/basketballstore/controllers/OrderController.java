@@ -42,6 +42,16 @@ public class OrderController {
         }
     }
 
+    @PatchMapping("/{id}/cancel")
+    public ResponseEntity<Object> cancel(@PathVariable Long id) {
+        try {
+            service.cancelOrder(id);
+            return ResponseEntity.ok("order cancelled");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody @Valid OrderCreationDTO data) {
         try {
