@@ -45,6 +45,11 @@
   cursor: pointer;
 }
 
+.filter-btn.active {
+  background-color: #2C3947;
+  color: #ffffff;
+}
+
 .categories-list {
     display: flex;
     flex-direction: row;

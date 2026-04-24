@@ -90,7 +90,7 @@ public class OrderService {
         Order order = repository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("order not found"));
 
-        if (!order.getState().equals("awaiting payment")) {
+        if (!order.getState().equals("awaiting_payment")) {
             throw new RuntimeException("order cannot be paid in current state");
         }
 

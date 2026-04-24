@@ -10,7 +10,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String state = "awaiting payment";
+    private String state = "awaiting_payment";
     @Column(updatable = false)
     private LocalDateTime creationDate = LocalDateTime.now();;
     private LocalDateTime estimatedDeliveryDate = null;

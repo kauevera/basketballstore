@@ -1,6 +1,8 @@
 let currentProduct = null;
 let paymentMethods = [];
 let orderContext = null;
+let allProducts = [];
+let currentCategoryId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
     if (!isAuthenticated()) {
@@ -8,15 +10,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     updateCartBadge();
+    document.querySelector(".filter-input").addEventListener("input", applyFilters);
     await Promise.all([loadPaymentMethods(), loadCategories(), mountProductsGrid()]);
 });
 
 async function mountProductsGrid() {
-    const data = await getProductsData();
+    allProducts = await getProductsData();
+    renderProducts(allProducts);
+}
+
+function renderProducts(products) {
     const gridContainer = document.getElementById("products-grid");
     gridContainer.innerHTML = "";
 
-    data.forEach(product => {
+    products.forEach(product => {
         const card = document.createElement("div");
         card.classList.add("product-card");
         card.innerHTML = `
@@ -34,6 +41,21 @@ async function mountProductsGrid() {
         card.addEventListener("click", () => openProductModal(product));
         gridContainer.appendChild(card);
     });
+}
+
+function applyFilters() {
+    const searchText = document.querySelector(".filter-input").value.toLowerCase().trim();
+    let filtered = allProducts;
+
+    if (currentCategoryId !== null) {
+        filtered = filtered.filter(p => p.categoryId === currentCategoryId);
+    }
+
+    if (searchText) {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(searchText));
+    }
+
+    renderProducts(filtered);
 }
 
 async function getProductsData() {
@@ -75,6 +97,17 @@ async function loadCategories() {
             btn.type = "button";
             btn.classList.add("filter-btn");
             btn.textContent = cat.title;
+            btn.addEventListener("click", () => {
+                if (currentCategoryId === cat.id) {
+                    currentCategoryId = null;
+                    btn.classList.remove("active");
+                } else {
+                    currentCategoryId = cat.id;
+                    list.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                }
+                applyFilters();
+            });
             list.appendChild(btn);
         });
     } catch {

@@ -45,9 +45,9 @@ function renderOrders(orders) {
     colCompleted.innerHTML = "";
     colCancelled.innerHTML = "";
 
-    const inProgress = orders.filter(o => o.state === "awaiting payment" || o.state === "payment_ok");
-    const completed = orders.filter(o => o.state === "completed");
-    const cancelled = orders.filter(o => o.state === "cancelled");
+    const inProgress = orders.filter(o => o.state === "awaiting_payment");
+    const completed = orders.filter(o => o.state === "payment_ok");
+    const cancelled = orders.filter(o => o.state === "canceled");
 
     document.getElementById("count-in-progress").textContent = inProgress.length;
     document.getElementById("count-completed").textContent = completed.length;
@@ -64,17 +64,15 @@ function renderOrders(orders) {
 
 function buildOrderCard(order) {
     const stateLabels = {
-        "awaiting payment": "Aguardando pagamento",
+        "awaiting_payment": "Aguardando pagamento",
         "payment_ok": "Pagamento confirmado",
-        "completed": "Finalizado",
-        "cancelled": "Cancelado"
+        "canceled": "Cancelado"
     };
 
     const stateClasses = {
-        "awaiting payment": "state-awaiting",
+        "awaiting_payment": "state-awaiting",
         "payment_ok": "state-paid",
-        "completed": "state-completed",
-        "cancelled": "state-cancelled"
+        "canceled": "state-cancelled"
     };
 
     const card = document.createElement("div");
@@ -91,7 +89,7 @@ function buildOrderCard(order) {
             <span class="order-payment">${order.paymentMethodTitle}</span>
         </div>
         <div class="order-date">${order.creationDate}</div>
-        ${order.state === "awaiting payment" ? `<button class="pay-btn" onclick="openPaymentModal(${order.id})">Realizar pagamento</button>` : ""}
+        ${order.state === "awaiting_payment" ? `<button class="pay-btn" onclick="openPaymentModal(${order.id})">Realizar pagamento</button>` : ""}
     `;
 
     return card;

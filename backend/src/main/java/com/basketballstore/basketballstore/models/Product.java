@@ -1,5 +1,6 @@
 package com.basketballstore.basketballstore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -16,6 +17,7 @@ public class Product implements Serializable {
     private Boolean availability = true;
     @Column(nullable = false)
     private Double quantity;
+    @JsonProperty("categoryId")
     @Column(nullable = false)
     private Long categoryId;
     @Column(nullable = false)
