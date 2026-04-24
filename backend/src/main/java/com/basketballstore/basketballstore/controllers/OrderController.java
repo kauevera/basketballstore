@@ -1,19 +1,20 @@
 package com.basketballstore.basketballstore.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
-import java.util.List;
 
-// importing layers
+import com.basketballstore.basketballstore.dto.OrderCreationDTO;
+import com.basketballstore.basketballstore.dto.OrderResponseDTO;
 import com.basketballstore.basketballstore.models.Order;
 import com.basketballstore.basketballstore.repositories.OrderRepository;
 import com.basketballstore.basketballstore.services.OrderService;
-import com.basketballstore.basketballstore.dto.OrderCreationDTO;
 
 @RestController
-@RequestMapping("/orders") // base route: localhost:8080/orders
+@RequestMapping("/orders")
 public class OrderController {
     @Autowired
     private OrderRepository repository;
@@ -27,8 +28,18 @@ public class OrderController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<Order> listByUser(@PathVariable Long userId) {
-        return repository.findByUserId(userId);
+    public List<OrderResponseDTO> listByUser(@PathVariable Long userId) {
+        return service.getUserOrders(userId);
+    }
+
+    @PatchMapping("/{id}/pay")
+    public ResponseEntity<Object> pay(@PathVariable Long id) {
+        try {
+            service.payOrder(id);
+            return ResponseEntity.ok("payment confirmed");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/create")

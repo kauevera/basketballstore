@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     updateCartBadge();
-    await loadPaymentMethods();
-    await mountProductsGrid();
+    await Promise.all([loadPaymentMethods(), loadCategories(), mountProductsGrid()]);
 });
 
 async function mountProductsGrid() {
@@ -62,6 +61,27 @@ async function loadPaymentMethods() {
     }
 }
 
+async function loadCategories() {
+    try {
+        const response = await fetch("http://localhost:8080/categories", {
+            headers: { Authorization: `Bearer ${getToken()}` }
+        });
+        if (!response.ok) throw new Error();
+        const categories = await response.json();
+        const list = document.getElementById("categories-list");
+        list.innerHTML = "";
+        categories.forEach(cat => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.classList.add("filter-btn");
+            btn.textContent = cat.title;
+            list.appendChild(btn);
+        });
+    } catch {
+        // fail silently
+    }
+}
+
 function openProductModal(product) {
     currentProduct = product;
     document.getElementById("modal-name").textContent = product.name;
@@ -85,7 +105,7 @@ function addCurrentToCart() {
 function buyNow() {
     if (!currentProduct) return;
     orderContext = "single";
-    closeProductModal();
+    document.getElementById("product-modal").classList.remove("open");
     openPaymentModal();
 }
 
@@ -133,6 +153,8 @@ function openPaymentModal() {
 
 function closePaymentModal() {
     document.getElementById("payment-modal").classList.remove("open");
+    currentProduct = null;
+    orderContext = null;
 }
 
 async function confirmOrder() {

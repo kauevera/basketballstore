@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="stylesheet" href="../../static/css/orders/orders.css">
+    <title>Basketball Store - Meus Pedidos</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div id="left-nav-bar">
+            <button type="button" class="nav-btn" onclick="redirectDashboard()">Tela inicial</button>
+        </div>
+        <div id="right-nav-bar">
+            <button type="button" class="nav-btn active-nav-btn">Meus pedidos</button>
+            <button type="button" class="nav-btn" onclick="logout()">Sair</button>
+        </div>
+    </nav>
+    <hr>
+    <div class="orders-page">
+        <h2 class="orders-title">Meus Pedidos</h2>
+        <div class="orders-board">
+            <div class="orders-column">
+                <div class="column-header in-progress-header">
+                    <span class="column-dot"></span>
+                    Em andamento
+                    <span id="count-in-progress" class="column-count">0</span>
+                </div>
+                <div id="col-in-progress" class="column-cards"></div>
+            </div>
+            <div class="orders-column">
+                <div class="column-header completed-header">
+                    <span class="column-dot"></span>
+                    Finalizados
+                    <span id="count-completed" class="column-count">0</span>
+                </div>
+                <div id="col-completed" class="column-cards"></div>
+            </div>
+            <div class="orders-column">
+                <div class="column-header cancelled-header">
+                    <span class="column-dot"></span>
+                    Cancelados
+                    <span id="count-cancelled" class="column-count">0</span>
+                </div>
+                <div id="col-cancelled" class="column-cards"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closePaymentModal()">✕</button>
+            <h3 class="modal-title">Forma de pagamento</h3>
+            <div id="payment-methods-list" class="payment-methods-list"></div>
+            <button class="request-btn" onclick="confirmPayment()">Confirmar pagamento</button>
+        </div>
+    </div>
+</body>
+<script src="../../static/js/pages_redirect.js"></script>
+<script src="../../static/js/auth/auth.js"></script>
+<script src="../../static/js/orders/orders.js"></script>
+</html>
