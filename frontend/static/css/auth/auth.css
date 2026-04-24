@@ -73,16 +73,3 @@
   cursor: pointer;
 }
 
-.request-btn {
-  background-color: rgb(0, 0, 0);
-  border: 0px solid #2C3947;
-  border-radius: 20px;
-  padding: 5px 15px;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.request-btn:hover {
-  cursor: pointer;
-  background-color: rgb(26, 26, 26);
-}

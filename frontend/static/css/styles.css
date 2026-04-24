@@ -42,5 +42,21 @@ body, button {
 
 hr {
   border-top: 1px solid rgba(0, 0, 0, 0.089);
-  margin: 15px 20px 25px 20px; 
+  margin: 15px 20px 25px 20px;
+}
+
+.request-btn {
+  background-color: #000000;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.request-btn:hover {
+  background-color: #1a1a1a;
 }

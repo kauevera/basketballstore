@@ -227,18 +227,3 @@
     height: 16px;
 }
 
-.request-btn {
-    background-color: rgb(0, 0, 0);
-    border: 0px solid #2C3947;
-    border-radius: 20px;
-    padding: 12px 20px;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-}
-
-.request-btn:hover {
-    background-color: rgb(26, 26, 26);
-}

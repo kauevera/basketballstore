@@ -33,9 +33,9 @@ function renderProducts(products) {
                     <p>${product.name}</p>
                     <p>R$ ${product.price.toFixed(2)}</p>
                 </div>
-                <div class="product-availability">
-                    <p>${product.availability ? "Disponível" : "Indisponível"}</p>
-                </div>
+                <span class="availability-badge ${product.availability ? 'badge-available' : 'badge-unavailable'}">
+                    ${product.availability ? "Disponível" : "Indisponível"}
+                </span>
             </div>
         `;
         card.addEventListener("click", () => openProductModal(product));
