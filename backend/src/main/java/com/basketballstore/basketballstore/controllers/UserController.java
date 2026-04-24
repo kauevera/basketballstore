@@ -37,8 +37,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Object> register(@RequestBody @Valid UserRegistrationDTO data) {
         try {
-            service.registerUser(data);
-            return ResponseEntity.status(201).body("user successfully registered at the basketball store");
+            LoginResponseDTO response = service.registerUser(data);
+            return ResponseEntity.status(201).body(response);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

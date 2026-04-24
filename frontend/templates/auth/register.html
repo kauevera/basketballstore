@@ -17,7 +17,7 @@
     </nav>
     <hr>
     <div class="content">
-        <div class="form-container">
+        <form class="form-container" onsubmit="register(); return false;">
             <div class="form-title">
                 <h3>Seja bem vindo</h3>
                 <p>Crie uma conta</p>
@@ -25,34 +25,34 @@
             <div class="form-fields">
                 <div class="form-input">
                     <label>Nome</label>
-                    <input type="text" id="name" title="name" placeholder="Digite o seu nome">
+                    <input type="text" id="name" placeholder="Digite o seu nome" autocomplete="name">
                 </div>
                 <div class="form-input">
                     <label>Idade</label>
-                    <input type="number" id="age" title="age" placeholder="Digite a sua idade">
+                    <input type="number" id="age" placeholder="Digite a sua idade" min="1" max="120">
                 </div>
                 <div class="form-input">
                     <label>Gênero</label>
-                    <input type="text" id="gender" title="gender" placeholder="Selecione o seu gênero">
+                    <input type="text" id="gender" placeholder="Selecione o seu gênero">
                 </div>
                 <div class="form-input">
                     <label>Email</label>
-                    <input type="email" id="email" title="email" placeholder="Email">
+                    <input type="email" id="email" placeholder="Email" autocomplete="email">
                 </div>
                 <div class="form-input">
                     <label>Senha</label>
-                    <input type="password" id="password" title="password" placeholder="***********">
+                    <input type="password" id="password" placeholder="***********" autocomplete="new-password">
                 </div>
                 <div class="form-input">
                     <label>Confirmar Senha</label>
-                    <input type="password" id="confirmPassword" title="confirmPassword" placeholder="***********">
+                    <input type="password" id="confirmPassword" placeholder="***********" autocomplete="new-password">
                 </div>
             </div>
             <div class="form-submit">
-                <button type="button" class="request-btn" onclick="register()">Criar conta</button>
+                <button type="submit" class="request-btn">Criar conta</button>
                 <button type="button" class="form-btn" onclick="redirectLogin()">Clique aqui caso já tenha uma conta</button>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 <script src="../../static/js/pages_redirect.js"></script>

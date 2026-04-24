@@ -22,7 +22,7 @@ public class UserService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public User registerUser(UserRegistrationDTO dto) {
+    public LoginResponseDTO registerUser(UserRegistrationDTO dto) {
         if (!dto.password().equals(dto.confirmPassword())) {
             throw new RuntimeException("the passwords don't match");
         }
@@ -40,7 +40,9 @@ public class UserService {
         newUser.setAge(dto.age());
         newUser.setGender(dto.gender());
 
-        return repository.save(newUser);
+        User saved = repository.save(newUser);
+        String token = jwtUtil.generateToken(saved.getEmail());
+        return new LoginResponseDTO(token, saved.getId(), saved.getEmail());
     }
 
     public LoginResponseDTO loginUser(UserLoginDTO dto) {

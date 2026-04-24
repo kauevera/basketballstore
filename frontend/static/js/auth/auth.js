@@ -42,14 +42,17 @@ async function register() {
             body: JSON.stringify({ name, age, gender, email, password, confirmPassword })
         });
 
-        const message = await response.text();
-
         if (!response.ok) {
+            const message = await response.text();
             alert(message);
             return;
         }
 
-        redirectLogin();
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("userEmail", data.email);
+        redirectDashboard();
     } catch (error) {
         alert("Erro ao conectar com o servidor.");
     }

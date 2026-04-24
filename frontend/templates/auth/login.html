@@ -17,7 +17,7 @@
     </nav>
     <hr>
     <div class="content">
-        <div class="form-container">
+        <form class="form-container" onsubmit="login(); return false;">
             <div class="form-title">
                 <h3>Bem vindo de volta</h3>
                 <p>Entre com sua conta</p>
@@ -25,18 +25,18 @@
             <div class="form-fields">
                 <div class="form-input">
                     <label>Email</label>
-                    <input type="email" id="email" title="email" placeholder="Email">
+                    <input type="email" id="email" placeholder="Email" autocomplete="email">
                 </div>
                 <div class="form-input">
                     <label>Senha</label>
-                    <input type="password" id="password" title="password" placeholder="Senha">
+                    <input type="password" id="password" placeholder="Senha" autocomplete="current-password">
                 </div>
             </div>
             <div class="form-submit">
-                <button type="button" class="request-btn" onclick="login()">Acessar conta</button>
+                <button type="submit" class="request-btn">Acessar conta</button>
                 <button type="button" class="form-btn" onclick="redirectRegister()">Não tem uma conta? Crie uma</button>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 <script src="../../static/js/pages_redirect.js"></script>
