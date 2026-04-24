@@ -1,4 +1,5 @@
 package com.basketballstore.basketballstore.controllers;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
-// importing layers
-import com.basketballstore.basketballstore.dto.UserRegistrationDTO;
+import com.basketballstore.basketballstore.dto.LoginResponseDTO;
 import com.basketballstore.basketballstore.dto.UserLoginDTO;
+import com.basketballstore.basketballstore.dto.UserRegistrationDTO;
 import com.basketballstore.basketballstore.models.User;
 import com.basketballstore.basketballstore.repositories.UserRepository;
 import com.basketballstore.basketballstore.services.UserService;
 
 @RestController
-@RequestMapping("/users") // base route: localhost:8080/users
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -32,7 +33,7 @@ public class UserController {
     public List<User> listAll() {
         return repository.findAll();
     }
-    
+
     @PostMapping("/register")
     public ResponseEntity<Object> register(@RequestBody @Valid UserRegistrationDTO data) {
         try {
@@ -46,14 +47,13 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid UserLoginDTO data) {
         try {
-            service.loginUser(data);
-            return ResponseEntity.status(201).body("login successful.");
+            LoginResponseDTO response = service.loginUser(data);
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    // delete an user
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         if (repository.existsById(id)) {
@@ -64,4 +64,3 @@ public class UserController {
         }
     }
 }
-

@@ -14,13 +14,7 @@ public record UserRegistrationDTO (
     @NotNull(message = "this field is required.")
     Integer age,
     @NotBlank(message = "this field is required.")
-    String gender,
-    @NotBlank(message = "this field is required.")
-    String country,
-    @NotBlank(message = "this field is required.")
-    String city,
-    @NotBlank(message = "this field is required.")
-    String zipCode
+    String gender
 ){
 
 }

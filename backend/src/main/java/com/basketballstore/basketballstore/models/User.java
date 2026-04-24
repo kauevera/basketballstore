@@ -19,12 +19,6 @@ public class User implements Serializable {
     private Integer age;
     @Column(nullable = false)
     private String gender;
-    @Column(nullable = false)
-    private String country;
-    @Column(nullable = false)
-    private String city;
-    @Column(nullable = false)
-    private String zipCode;
 
     //getters and setters
     public Long getId() {
@@ -67,26 +61,5 @@ public class User implements Serializable {
     }
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getzipCode() {
-        return zipCode;
-    }
-    public void setzipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 }
