@@ -22,6 +22,8 @@ public class Product implements Serializable {
     private Long categoryId;
     @Column(nullable = false)
     private Long brandId;
+    @JsonProperty("imageUrl")
+    private String imageUrl;
 
     //getters and setters
     public Long getId() {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/svg+xml" href="../../static/favicon.svg">
     <link rel="stylesheet" href="../../static/css/styles.css">
     <link rel="stylesheet" href="../../static/css/products/dashboard.css">
     <title>Basketball Store - Home</title>
@@ -29,20 +30,21 @@
     </div>
     <div class="content">
         <div id="products-grid"></div>
+        <div id="pagination" class="pagination"></div>
     </div>
 
     <div id="product-modal" class="modal-overlay">
         <div class="modal">
             <button class="modal-close" onclick="closeProductModal()">✕</button>
             <div class="modal-body">
-                <img src="images/bag.png" class="modal-img" alt="produto">
+                <img src="images/bag.png" id="modal-img" class="modal-img" alt="produto">
                 <div class="modal-info">
                     <h2 id="modal-name"></h2>
                     <p id="modal-price" class="modal-price"></p>
                     <p id="modal-availability" class="modal-tag"></p>
                 </div>
             </div>
-            <div class="modal-actions">
+            <div id="modal-actions" class="modal-actions">
                 <button class="request-btn" onclick="addCurrentToCart()">Adicionar ao carrinho</button>
                 <button class="request-btn buy-btn" onclick="buyNow()">Comprar agora</button>
             </div>

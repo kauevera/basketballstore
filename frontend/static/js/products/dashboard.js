@@ -2,7 +2,10 @@ let currentProduct = null;
 let paymentMethods = [];
 let orderContext = null;
 let allProducts = [];
+let filteredProducts = [];
 let currentCategoryId = null;
+let currentPage = 0;
+const PAGE_SIZE = 28;
 
 document.addEventListener("DOMContentLoaded", async () => {
     if (!isAuthenticated()) {
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function mountProductsGrid() {
     allProducts = await getProductsData();
-    renderProducts(allProducts);
+    applyFilters();
 }
 
 function renderProducts(products) {
@@ -27,7 +30,7 @@ function renderProducts(products) {
         const card = document.createElement("div");
         card.classList.add("product-card");
         card.innerHTML = `
-            <img src="images/bag.png" alt="${product.name}" class="product-img">
+            <img src="${product.imageUrl || 'images/bag.png'}" alt="${product.name}" class="product-img">
             <div class="product-description">
                 <div class="product-title">
                     <p>${product.name}</p>
@@ -55,7 +58,50 @@ function applyFilters() {
         filtered = filtered.filter(p => p.name.toLowerCase().includes(searchText));
     }
 
-    renderProducts(filtered);
+    filteredProducts = filtered;
+    currentPage = 0;
+    renderCurrentPage();
+}
+
+function renderCurrentPage() {
+    const start = currentPage * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    renderProducts(filteredProducts.slice(start, end));
+    updatePagination();
+}
+
+function updatePagination() {
+    const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE);
+    const container = document.getElementById("pagination");
+    container.innerHTML = "";
+
+    if (totalPages <= 1) return;
+
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.classList.add("page-btn");
+    prev.textContent = "←";
+    prev.disabled = currentPage === 0;
+    prev.addEventListener("click", () => { currentPage--; renderCurrentPage(); });
+    container.appendChild(prev);
+
+    for (let i = 0; i < totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.classList.add("page-btn");
+        if (i === currentPage) btn.classList.add("page-btn-active");
+        btn.textContent = i + 1;
+        btn.addEventListener("click", () => { currentPage = i; renderCurrentPage(); });
+        container.appendChild(btn);
+    }
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.classList.add("page-btn");
+    next.textContent = "→";
+    next.disabled = currentPage === totalPages - 1;
+    next.addEventListener("click", () => { currentPage++; renderCurrentPage(); });
+    container.appendChild(next);
 }
 
 async function getProductsData() {
@@ -92,20 +138,28 @@ async function loadCategories() {
         const categories = await response.json();
         const list = document.getElementById("categories-list");
         list.innerHTML = "";
+
+        const allBtn = document.createElement("button");
+        allBtn.type = "button";
+        allBtn.classList.add("filter-btn", "active");
+        allBtn.textContent = "Todos";
+        allBtn.addEventListener("click", () => {
+            currentCategoryId = null;
+            list.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            allBtn.classList.add("active");
+            applyFilters();
+        });
+        list.appendChild(allBtn);
+
         categories.forEach(cat => {
             const btn = document.createElement("button");
             btn.type = "button";
             btn.classList.add("filter-btn");
             btn.textContent = cat.title;
             btn.addEventListener("click", () => {
-                if (currentCategoryId === cat.id) {
-                    currentCategoryId = null;
-                    btn.classList.remove("active");
-                } else {
-                    currentCategoryId = cat.id;
-                    list.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                    btn.classList.add("active");
-                }
+                currentCategoryId = cat.id;
+                list.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
                 applyFilters();
             });
             list.appendChild(btn);
@@ -120,6 +174,8 @@ function openProductModal(product) {
     document.getElementById("modal-name").textContent = product.name;
     document.getElementById("modal-price").textContent = `R$ ${product.price.toFixed(2)}`;
     document.getElementById("modal-availability").textContent = product.availability ? "Disponível" : "Indisponível";
+    document.getElementById("modal-img").src = product.imageUrl || "images/bag.png";
+    document.getElementById("modal-actions").style.display = product.availability ? "" : "none";
     document.getElementById("product-modal").classList.add("open");
 }
 

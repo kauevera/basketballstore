@@ -431,3 +431,45 @@
     font-size: 11px;
     font-weight: 700;
 }
+
+.pagination {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid #e8dcc8;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.page-btn {
+    background: none;
+    border: 1px solid #C2A56D;
+    color: #C2A56D;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.page-btn:hover:not(:disabled) {
+    background: #C2A56D;
+    color: #fff;
+}
+
+.page-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.page-btn-active {
+    background: #C2A56D;
+    color: #fff;
+}
