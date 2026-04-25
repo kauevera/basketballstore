@@ -37,7 +37,7 @@ function renderProducts(products) {
                     <p>R$ ${product.price.toFixed(2)}</p>
                 </div>
                 <span class="availability-badge ${product.availability ? 'badge-available' : 'badge-unavailable'}">
-                    ${product.availability ? "Disponível" : "Indisponível"}
+                    ${product.availability ? "Dispon\u00EDvel" : "Indispon\u00EDvel"}
                 </span>
             </div>
         `;
@@ -80,7 +80,7 @@ function updatePagination() {
     const prev = document.createElement("button");
     prev.type = "button";
     prev.classList.add("page-btn");
-    prev.textContent = "←";
+    prev.textContent = "\u2190";
     prev.disabled = currentPage === 0;
     prev.addEventListener("click", () => { currentPage--; renderCurrentPage(); });
     container.appendChild(prev);
@@ -98,7 +98,7 @@ function updatePagination() {
     const next = document.createElement("button");
     next.type = "button";
     next.classList.add("page-btn");
-    next.textContent = "→";
+    next.textContent = "\u2192";
     next.disabled = currentPage === totalPages - 1;
     next.addEventListener("click", () => { currentPage++; renderCurrentPage(); });
     container.appendChild(next);
@@ -173,7 +173,7 @@ function openProductModal(product) {
     currentProduct = product;
     document.getElementById("modal-name").textContent = product.name;
     document.getElementById("modal-price").textContent = `R$ ${product.price.toFixed(2)}`;
-    document.getElementById("modal-availability").textContent = product.availability ? "Disponível" : "Indisponível";
+    document.getElementById("modal-availability").textContent = product.availability ? "Dispon\u00EDvel" : "Indispon\u00EDvel";
     document.getElementById("modal-img").src = product.imageUrl || "images/bag.png";
     document.getElementById("modal-actions").style.display = product.availability ? "" : "none";
     document.getElementById("product-modal").classList.add("open");
@@ -215,7 +215,7 @@ function toggleCart() {
 
 function openPaymentFromCart() {
     if (getCart().length === 0) {
-        alert("O carrinho está vazio.");
+        alert("O carrinho est\u00E1 vazio.");
         return;
     }
     orderContext = "cart";

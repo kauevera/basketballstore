@@ -58,7 +58,7 @@ function renderCartItems() {
     container.innerHTML = "";
 
     if (items.length === 0) {
-        container.innerHTML = '<p class="cart-empty">Seu carrinho está vazio.</p>';
+        container.innerHTML = '<p class="cart-empty">Seu carrinho est\u00E1 vazio.</p>';
         if (totalEl) totalEl.textContent = "";
         return;
     }
@@ -73,7 +73,7 @@ function renderCartItems() {
             </div>
             <div class="cart-item-right">
                 <span class="cart-item-price">R$ ${(item.price * item.qty).toFixed(2)}</span>
-                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">\u2715</button>
             </div>
         `;
         container.appendChild(el);
