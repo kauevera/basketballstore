@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - db-data:/app/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/basketballstore.db
+      - TZ=UTC
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/static:/usr/share/nginx/html/static
+      - ./frontend/templates:/usr/share/nginx/html/templates
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  db-data:
