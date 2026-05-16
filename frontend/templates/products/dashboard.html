@@ -13,12 +13,13 @@
             <button type="button" class="nav-btn" onclick="redirectDashboard()">Tela inicial</button>
         </div>
         <div id="right-nav-bar">
-            <button type="button" class="nav-btn" onclick="redirectOrders()">Meus pedidos</button>
-            <button type="button" class="nav-btn cart-nav-btn" onclick="toggleCart()">
+            <button type="button" id="nav-orders" class="nav-btn" onclick="redirectOrders()">Meus pedidos</button>
+            <button type="button" id="nav-cart" class="nav-btn cart-nav-btn" onclick="toggleCart()">
                 Carrinho
                 <span id="cart-badge" class="cart-badge" style="display:none">0</span>
             </button>
-            <button type="button" class="nav-btn" onclick="logout()">Sair</button>
+            <button type="button" id="nav-logout" class="nav-btn" onclick="logout()">Sair</button>
+            <button type="button" id="nav-login" class="nav-btn" onclick="redirectLogin()" style="display:none">Entrar</button>
         </div>
     </nav>
     <hr>

@@ -10,14 +10,21 @@ let currentPage = 0;
 const PAGE_SIZE = 28;
 
 document.addEventListener("DOMContentLoaded", async () => {
-    if (!isAuthenticated()) {
-        redirectLogin();
-        return;
-    }
+    updateNavBar();
     updateCartBadge();
     document.querySelector(".filter-input").addEventListener("input", applyFilters);
-    await Promise.all([loadPaymentMethods(), loadCategories(), mountProductsGrid()]);
+    const tasks = [loadCategories(), mountProductsGrid()];
+    if (isAuthenticated()) tasks.push(loadPaymentMethods());
+    await Promise.all(tasks);
 });
+
+function updateNavBar() {
+    const auth = isAuthenticated();
+    document.getElementById("nav-orders").style.display = auth ? "" : "none";
+    document.getElementById("nav-cart").style.display   = auth ? "" : "none";
+    document.getElementById("nav-logout").style.display = auth ? "" : "none";
+    document.getElementById("nav-login").style.display  = auth ? "none" : "";
+}
 
 async function mountProductsGrid() {
     allProducts = await getProductsData();
@@ -108,9 +115,7 @@ function updatePagination() {
 
 async function getProductsData() {
     try {
-        const response = await fetch(`${API_BASE_URL}/products`, {
-            headers: { Authorization: `Bearer ${getToken()}` }
-        });
+        const response = await fetch(`${API_BASE_URL}/products`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         return await response.json();
     } catch (error) {
@@ -133,9 +138,7 @@ async function loadPaymentMethods() {
 
 async function loadCategories() {
     try {
-        const response = await fetch(`${API_BASE_URL}/categories`, {
-            headers: { Authorization: `Bearer ${getToken()}` }
-        });
+        const response = await fetch(`${API_BASE_URL}/categories`);
         if (!response.ok) throw new Error();
         const categories = await response.json();
         const list = document.getElementById("categories-list");
@@ -220,6 +223,11 @@ function addCurrentToCart() {
 
 function buyNow() {
     if (!currentProduct) return;
+    if (!isAuthenticated()) {
+        showToast("Faça login para realizar uma compra.", 'info');
+        setTimeout(redirectLogin, 1800);
+        return;
+    }
     pendingQuantity = modalQuantity;
     orderContext = "single";
     document.getElementById("product-modal").classList.remove("open");
@@ -242,6 +250,11 @@ function toggleCart() {
 }
 
 function openPaymentFromCart() {
+    if (!isAuthenticated()) {
+        showToast("Fa\u00E7a login para finalizar o pedido.", 'info');
+        setTimeout(redirectLogin, 1800);
+        return;
+    }
     if (getCart().length === 0) {
         showToast("O carrinho est\u00E1 vazio.", 'info');
         return;
