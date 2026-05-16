@@ -215,10 +215,14 @@ function closeProductModal() {
 }
 
 function addCurrentToCart() {
-    if (currentProduct) {
-        addToCart(currentProduct, modalQuantity);
-        closeProductModal();
+    if (!currentProduct) return;
+    if (!isAuthenticated()) {
+        showToast("Faça login para adicionar ao carrinho.", 'info');
+        setTimeout(redirectLogin, 1800);
+        return;
     }
+    addToCart(currentProduct, modalQuantity);
+    closeProductModal();
 }
 
 function buyNow() {
