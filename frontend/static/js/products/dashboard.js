@@ -218,7 +218,6 @@ function addCurrentToCart() {
     if (!currentProduct) return;
     if (!isAuthenticated()) {
         showToast("Faça login para adicionar ao carrinho.", 'info');
-        setTimeout(redirectLogin, 1800);
         return;
     }
     addToCart(currentProduct, modalQuantity);
@@ -229,7 +228,6 @@ function buyNow() {
     if (!currentProduct) return;
     if (!isAuthenticated()) {
         showToast("Faça login para realizar uma compra.", 'info');
-        setTimeout(redirectLogin, 1800);
         return;
     }
     pendingQuantity = modalQuantity;
@@ -256,7 +254,6 @@ function toggleCart() {
 function openPaymentFromCart() {
     if (!isAuthenticated()) {
         showToast("Fa\u00E7a login para finalizar o pedido.", 'info');
-        setTimeout(redirectLogin, 1800);
         return;
     }
     if (getCart().length === 0) {
