@@ -1,5 +1,3 @@
-const API_BASE_URL = "/api";
-
 let currentProduct = null;
 let paymentMethods = [];
 let orderContext = null;
