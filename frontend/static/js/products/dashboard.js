@@ -3,6 +3,8 @@ const API_BASE_URL = "/api";
 let currentProduct = null;
 let paymentMethods = [];
 let orderContext = null;
+let modalQuantity = 1;
+let pendingQuantity = 1;
 let allProducts = [];
 let filteredProducts = [];
 let currentCategoryId = null;
@@ -173,28 +175,54 @@ async function loadCategories() {
 
 function openProductModal(product) {
     currentProduct = product;
+    modalQuantity = 1;
     document.getElementById("modal-name").textContent = product.name;
     document.getElementById("modal-price").textContent = `R$ ${product.price.toFixed(2)}`;
     document.getElementById("modal-availability").textContent = product.availability ? "Dispon\u00EDvel" : "Indispon\u00EDvel";
     document.getElementById("modal-img").src = product.imageUrl || "images/bag.png";
-    document.getElementById("modal-actions").style.display = product.availability ? "" : "none";
+    const available = product.availability;
+    document.getElementById("modal-actions").style.display = available ? "" : "none";
+    document.getElementById("modal-qty-row").style.display = available ? "" : "none";
+    document.getElementById("modal-qty-display").textContent = 1;
+    document.getElementById("modal-qty-dec").disabled = true;
+    document.getElementById("modal-qty-inc").disabled = product.quantity <= 1;
     document.getElementById("product-modal").classList.add("open");
+}
+
+function incrementModalQty() {
+    if (modalQuantity < currentProduct.quantity) {
+        modalQuantity++;
+        document.getElementById("modal-qty-display").textContent = modalQuantity;
+        document.getElementById("modal-qty-dec").disabled = false;
+        document.getElementById("modal-qty-inc").disabled = modalQuantity >= currentProduct.quantity;
+    }
+}
+
+function decrementModalQty() {
+    if (modalQuantity > 1) {
+        modalQuantity--;
+        document.getElementById("modal-qty-display").textContent = modalQuantity;
+        document.getElementById("modal-qty-dec").disabled = modalQuantity <= 1;
+        document.getElementById("modal-qty-inc").disabled = false;
+    }
 }
 
 function closeProductModal() {
     document.getElementById("product-modal").classList.remove("open");
     currentProduct = null;
+    modalQuantity = 1;
 }
 
 function addCurrentToCart() {
     if (currentProduct) {
-        addToCart(currentProduct);
+        addToCart(currentProduct, modalQuantity);
         closeProductModal();
     }
 }
 
 function buyNow() {
     if (!currentProduct) return;
+    pendingQuantity = modalQuantity;
     orderContext = "single";
     document.getElementById("product-modal").classList.remove("open");
     openPaymentModal();
@@ -260,10 +288,10 @@ async function confirmOrder() {
 
     try {
         if (orderContext === "single" && currentProduct) {
-            await createOrder(currentProduct.id, userId, paymentMethodId);
+            await createOrder(currentProduct.id, userId, paymentMethodId, pendingQuantity);
         } else if (orderContext === "cart") {
             for (const item of getCart()) {
-                await createOrder(item.id, userId, paymentMethodId);
+                await createOrder(item.id, userId, paymentMethodId, item.qty);
             }
             clearCart();
         }
@@ -275,14 +303,14 @@ async function confirmOrder() {
     }
 }
 
-async function createOrder(productId, userId, paymentMethodId) {
+async function createOrder(productId, userId, paymentMethodId, quantity) {
     const response = await fetch(`${API_BASE_URL}/orders/create`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${getToken()}`
         },
-        body: JSON.stringify({ productId, userId, paymentMethodId })
+        body: JSON.stringify({ productId, userId, paymentMethodId, quantity })
     });
 
     if (!response.ok) {

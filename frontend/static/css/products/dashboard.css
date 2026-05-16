@@ -238,6 +238,59 @@
     width: fit-content;
 }
 
+.modal-qty-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.modal-qty-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2C3947;
+}
+
+.modal-qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #2C3947;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2C3947;
+    line-height: 1;
+    padding: 0;
+}
+
+.qty-btn:hover:not(:disabled) {
+    background: #2C3947;
+    color: #fff;
+}
+
+.qty-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.qty-display {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2C3947;
+    min-width: 28px;
+    text-align: center;
+}
+
 .modal-actions {
     display: flex;
     gap: 12px;

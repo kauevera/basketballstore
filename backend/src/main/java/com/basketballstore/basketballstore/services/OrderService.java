@@ -45,11 +45,15 @@ public class OrderService {
             throw new RuntimeException("this product is not available");
         }
 
+        if (dto.quantity() > product.getQuantity().intValue()) {
+            throw new RuntimeException("insufficient stock for the requested quantity");
+        }
+
         if (!paymentMethodRepository.findById(dto.paymentMethodId()).isPresent()) {
             throw new RuntimeException("this payment method is not accepted");
         }
 
-        double newQuantity = product.getQuantity() - 1;
+        double newQuantity = product.getQuantity() - dto.quantity();
         product.setQuantity(newQuantity);
         if (newQuantity < 1) {
             product.setAvailability(false);
@@ -60,6 +64,7 @@ public class OrderService {
         newOrder.setUserId(dto.userId());
         newOrder.setProductId(dto.productId());
         newOrder.setPaymentMethodId(dto.paymentMethodId());
+        newOrder.setQuantity(dto.quantity());
         repository.save(newOrder);
 
         Transaction newTransaction = new Transaction();
@@ -88,7 +93,8 @@ public class OrderService {
                     formattedDate,
                     productName,
                     productPrice,
-                    paymentMethodTitle
+                    paymentMethodTitle,
+                    order.getQuantity() != null ? order.getQuantity() : 1
             );
         }).toList();
     }

@@ -22,6 +22,8 @@ public class Order implements Serializable {
     private Long transactionId = null;
     @Column(nullable = false)
     private Long paymentMethodId;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 1")
+    private Integer quantity = 1;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -49,4 +51,7 @@ public class Order implements Serializable {
 
     public Long getPaymentMethodId() { return paymentMethodId; }
     public void setPaymentMethodId(Long paymentMethodId) { this.paymentMethodId = paymentMethodId; }
+
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
 }

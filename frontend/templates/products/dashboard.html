@@ -45,6 +45,14 @@
                     <p id="modal-availability" class="modal-tag"></p>
                 </div>
             </div>
+            <div id="modal-qty-row" class="modal-qty-row">
+                <span class="modal-qty-label">Quantidade:</span>
+                <div class="modal-qty-controls">
+                    <button type="button" id="modal-qty-dec" class="qty-btn" onclick="decrementModalQty()">&#8722;</button>
+                    <span id="modal-qty-display" class="qty-display">1</span>
+                    <button type="button" id="modal-qty-inc" class="qty-btn" onclick="incrementModalQty()">+</button>
+                </div>
+            </div>
             <div id="modal-actions" class="modal-actions">
                 <button class="request-btn" onclick="addCurrentToCart()">Adicionar ao carrinho</button>
                 <button class="request-btn buy-btn" onclick="buyNow()">Comprar agora</button>

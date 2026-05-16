@@ -6,5 +6,6 @@ public record OrderResponseDTO(
     String creationDate,
     String productName,
     Double productPrice,
-    String paymentMethodTitle
+    String paymentMethodTitle,
+    Integer quantity
 ) {}

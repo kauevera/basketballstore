@@ -9,13 +9,13 @@ function saveCart(items) {
     localStorage.setItem(CART_KEY, JSON.stringify(items));
 }
 
-function addToCart(product) {
+function addToCart(product, qty = 1) {
     const items = getCart();
     const existing = items.find(i => i.id === product.id);
     if (existing) {
-        existing.qty += 1;
+        existing.qty += qty;
     } else {
-        items.push({ id: product.id, name: product.name, price: product.price, qty: 1 });
+        items.push({ id: product.id, name: product.name, price: product.price, qty });
     }
     saveCart(items);
     updateCartBadge();

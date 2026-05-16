@@ -85,7 +85,8 @@ function buildOrderCard(order) {
         </div>
         <div class="order-product-name">${order.productName}</div>
         <div class="order-details">
-            <span class="order-price">R$ ${order.productPrice.toFixed(2)}</span>
+            <span class="order-price">R$ ${(order.productPrice * (order.quantity || 1)).toFixed(2)}</span>
+            <span class="order-qty">Qtd: ${order.quantity || 1}</span>
             <span class="order-payment">${order.paymentMethodTitle}</span>
         </div>
         <div class="order-date">${order.creationDate}</div>
