@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 import com.basketballstore.basketballstore.dto.LoginResponseDTO;
 import com.basketballstore.basketballstore.dto.UserLoginDTO;
 import com.basketballstore.basketballstore.dto.UserRegistrationDTO;
-import com.basketballstore.basketballstore.models.User;
+import com.basketballstore.basketballstore.dto.UserResponseDTO;
 import com.basketballstore.basketballstore.repositories.UserRepository;
 import com.basketballstore.basketballstore.services.UserService;
 
@@ -30,8 +30,10 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    public List<User> listAll() {
-        return repository.findAll();
+    public List<UserResponseDTO> listAll() {
+        return repository.findAll().stream()
+                .map(u -> new UserResponseDTO(u.getId(), u.getName(), u.getEmail(), u.getAge(), u.getGender()))
+                .toList();
     }
 
     @PostMapping("/register")
