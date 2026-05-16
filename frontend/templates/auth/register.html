@@ -35,7 +35,12 @@
                 </div>
                 <div class="form-input">
                     <label>Gênero</label>
-                    <input type="text" id="gender" placeholder="Selecione o seu gênero">
+                    <select id="gender">
+                        <option value="" disabled selected>Selecione o gênero</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="N/A">N/A</option>
+                    </select>
                 </div>
                 <div class="form-input">
                     <label>Email</label>
@@ -43,11 +48,21 @@
                 </div>
                 <div class="form-input">
                     <label>Senha</label>
-                    <input type="password" id="password" placeholder="***********" autocomplete="new-password">
+                    <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="***********" autocomplete="new-password" oninput="updatePasswordStrength()">
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')" aria-label="Mostrar senha"></button>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strength-fill"></div>
+                    </div>
+                    <span class="strength-label" id="strength-label"></span>
                 </div>
                 <div class="form-input">
                     <label>Confirmar Senha</label>
-                    <input type="password" id="confirmPassword" placeholder="***********" autocomplete="new-password">
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmPassword" placeholder="***********" autocomplete="new-password">
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')" aria-label="Mostrar senha"></button>
+                    </div>
                 </div>
             </div>
             <div class="form-submit">

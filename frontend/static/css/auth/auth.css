@@ -26,32 +26,60 @@ form.form-container {
     width: 500px;
 }
 
-.form-fields, .form-title, .form-submit{
+.form-fields, .form-title, .form-submit {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.form-fields {
+    gap: 16px;
+    width: 100%;
+    padding: 0 60px;
+    box-sizing: border-box;
+}
+
 .form-input {
     display: flex;
     flex-direction: column;
-    align-items: left;
-    gap: 10px;
+    gap: 6px;
+    width: 100%;
 }
 
-.form-input input {
-    margin-right: 10px;
+.form-input label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2C3947;
+    padding-left: 4px;
+}
+
+.form-input input,
+.form-input select {
+    width: 100%;
+    box-sizing: border-box;
     border: none;
     outline: none;
     border-radius: 40px;
     background: #E8EDF2;
-    font-size: 16px;
-    flex: 1;
-    padding: 15px 15px;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 13px 18px;
+    color: #2C3947;
+    height: 48px;
 }
 
-.form-fields {
-    gap: 20px;
+.form-input select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    padding-right: 42px;
+    cursor: pointer;
+}
+
+.form-input select option[value=""][disabled] {
+    color: #aaa;
 }
 
 .form-title {
@@ -68,29 +96,29 @@ form.form-container {
 }
 
 .form-btn {
-  background-color: transparent;
-  border: 0px solid #2C3947;
-  border-radius: 20px;
-  padding: 5px 15px;
-  font-weight: 600;
-  color: #2C3947;
+    background-color: transparent;
+    border: 0px solid #2C3947;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-weight: 600;
+    color: #2C3947;
 }
 
 .form-btn:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
+
+/* ── Password toggle ── */
 
 .password-wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .password-wrapper input {
-    margin-right: 0;
     padding-right: 46px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .toggle-password {
@@ -113,3 +141,25 @@ form.form-container {
     color: #2C3947;
 }
 
+/* ── Password strength ── */
+
+.strength-bar {
+    height: 5px;
+    background: #E8EDF2;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 4px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-label {
+    font-size: 12px;
+    font-weight: 600;
+    min-height: 16px;
+}
