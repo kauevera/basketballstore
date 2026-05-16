@@ -1,3 +1,5 @@
+const API_BASE_URL = "/api";
+
 let currentProduct = null;
 let paymentMethods = [];
 let orderContext = null;
@@ -106,7 +108,7 @@ function updatePagination() {
 
 async function getProductsData() {
     try {
-        const response = await fetch("http://localhost:8080/products", {
+        const response = await fetch(`${API_BASE_URL}/products`, {
             headers: { Authorization: `Bearer ${getToken()}` }
         });
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -119,7 +121,7 @@ async function getProductsData() {
 
 async function loadPaymentMethods() {
     try {
-        const response = await fetch("http://localhost:8080/payment-methods", {
+        const response = await fetch(`${API_BASE_URL}/payment-methods`, {
             headers: { Authorization: `Bearer ${getToken()}` }
         });
         if (!response.ok) throw new Error();
@@ -131,7 +133,7 @@ async function loadPaymentMethods() {
 
 async function loadCategories() {
     try {
-        const response = await fetch("http://localhost:8080/categories", {
+        const response = await fetch(`${API_BASE_URL}/categories`, {
             headers: { Authorization: `Bearer ${getToken()}` }
         });
         if (!response.ok) throw new Error();
@@ -274,7 +276,7 @@ async function confirmOrder() {
 }
 
 async function createOrder(productId, userId, paymentMethodId) {
-    const response = await fetch("http://localhost:8080/orders/create", {
+    const response = await fetch(`${API_BASE_URL}/orders/create`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
