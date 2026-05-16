@@ -49,6 +49,13 @@ public class OrderService {
             throw new RuntimeException("this payment method is not accepted");
         }
 
+        double newQuantity = product.getQuantity() - 1;
+        product.setQuantity(newQuantity);
+        if (newQuantity < 1) {
+            product.setAvailability(false);
+        }
+        productRepository.save(product);
+
         Order newOrder = new Order();
         newOrder.setuserId(dto.userId());
         newOrder.setproductId(dto.productId());
