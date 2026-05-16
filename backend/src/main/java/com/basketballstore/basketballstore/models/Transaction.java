@@ -18,35 +18,18 @@ public class Transaction implements Serializable {
     @Column(nullable = false)
     private Long orderId;
 
-    //getters and setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public LocalDateTime getcreationDate() {
-        return creationDate;
-    }
-    public void setcreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-    public Long getpaymentMethodId() {
-        return paymentMethodId;
-    }
-    public void setpaymentMethodId(Long paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
-    }
-    public Boolean getState() {
-        return state;
-    }
-    public void setState(Boolean state) {
-        this.state = state;
-    }
-    public Long getorderId() {
-        return orderId;
-    }
-    public void setorderId(Long orderId) {
-        this.orderId = orderId;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public LocalDateTime getCreationDate() { return creationDate; }
+    public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
+
+    public Long getPaymentMethodId() { return paymentMethodId; }
+    public void setPaymentMethodId(Long paymentMethodId) { this.paymentMethodId = paymentMethodId; }
+
+    public Boolean getState() { return state; }
+    public void setState(Boolean state) { this.state = state; }
+
+    public Long getOrderId() { return orderId; }
+    public void setOrderId(Long orderId) { this.orderId = orderId; }
 }

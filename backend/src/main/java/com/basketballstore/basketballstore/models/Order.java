@@ -12,7 +12,7 @@ public class Order implements Serializable {
     private Long id;
     private String state = "awaiting_payment";
     @Column(updatable = false)
-    private LocalDateTime creationDate = LocalDateTime.now();;
+    private LocalDateTime creationDate = LocalDateTime.now();
     private LocalDateTime estimatedDeliveryDate = null;
     private LocalDateTime realDeliveryDate = null;
     @Column(nullable = false, updatable = false)
@@ -23,59 +23,30 @@ public class Order implements Serializable {
     @Column(nullable = false)
     private Long paymentMethodId;
 
-    //getters and setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getState() {
-        return state;
-    }
-    public void setState(String state) {
-        this.state = state;
-    }
-    public LocalDateTime getcreationDate() {
-        return creationDate;
-    }
-    public void setcreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-    public LocalDateTime getestimatedDeliveryDate() {
-        return estimatedDeliveryDate;
-    }
-    public void setestimatedDeliveryDate(LocalDateTime estimatedDeliveryDate) {
-        this.estimatedDeliveryDate = estimatedDeliveryDate;
-    }
-    public LocalDateTime getrealDeliveryDate() {
-        return realDeliveryDate;
-    }
-    public void setrealDeliveryDate(LocalDateTime realDeliveryDate) {
-        this.realDeliveryDate = realDeliveryDate;
-    }
-    public Long getuserId() {
-        return userId;
-    }
-    public void setuserId(Long userId) {
-        this.userId = userId;
-    }
-    public Long getproductId() {
-        return productId;
-    }
-    public void setproductId(Long productId) {
-        this.productId = productId;
-    }
-    public Long gettransactionId() {
-        return transactionId;
-    }
-    public void settransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-    public Long getpaymentMethodId() {
-        return paymentMethodId;
-    }
-    public void setpaymentMethodId(Long paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getState() { return state; }
+    public void setState(String state) { this.state = state; }
+
+    public LocalDateTime getCreationDate() { return creationDate; }
+    public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
+
+    public LocalDateTime getEstimatedDeliveryDate() { return estimatedDeliveryDate; }
+    public void setEstimatedDeliveryDate(LocalDateTime estimatedDeliveryDate) { this.estimatedDeliveryDate = estimatedDeliveryDate; }
+
+    public LocalDateTime getRealDeliveryDate() { return realDeliveryDate; }
+    public void setRealDeliveryDate(LocalDateTime realDeliveryDate) { this.realDeliveryDate = realDeliveryDate; }
+
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
+
+    public Long getProductId() { return productId; }
+    public void setProductId(Long productId) { this.productId = productId; }
+
+    public Long getTransactionId() { return transactionId; }
+    public void setTransactionId(Long transactionId) { this.transactionId = transactionId; }
+
+    public Long getPaymentMethodId() { return paymentMethodId; }
+    public void setPaymentMethodId(Long paymentMethodId) { this.paymentMethodId = paymentMethodId; }
 }

@@ -57,30 +57,30 @@ public class OrderService {
         productRepository.save(product);
 
         Order newOrder = new Order();
-        newOrder.setuserId(dto.userId());
-        newOrder.setproductId(dto.productId());
-        newOrder.setpaymentMethodId(dto.paymentMethodId());
+        newOrder.setUserId(dto.userId());
+        newOrder.setProductId(dto.productId());
+        newOrder.setPaymentMethodId(dto.paymentMethodId());
         repository.save(newOrder);
 
         Transaction newTransaction = new Transaction();
-        newTransaction.setorderId(newOrder.getId());
-        newTransaction.setpaymentMethodId(newOrder.getpaymentMethodId());
+        newTransaction.setOrderId(newOrder.getId());
+        newTransaction.setPaymentMethodId(newOrder.getPaymentMethodId());
         transactionRepository.save(newTransaction);
 
-        newOrder.settransactionId(newTransaction.getId());
+        newOrder.setTransactionId(newTransaction.getId());
         return repository.save(newOrder);
     }
 
     public List<OrderResponseDTO> getUserOrders(Long userId) {
         return repository.findByUserId(userId).stream().map(order -> {
-            String productName = productRepository.findById(order.getproductId())
+            String productName = productRepository.findById(order.getProductId())
                     .map(Product::getName).orElse("Produto desconhecido");
-            Double productPrice = productRepository.findById(order.getproductId())
+            Double productPrice = productRepository.findById(order.getProductId())
                     .map(Product::getPrice).orElse(0.0);
-            String paymentMethodTitle = paymentMethodRepository.findById(order.getpaymentMethodId())
+            String paymentMethodTitle = paymentMethodRepository.findById(order.getPaymentMethodId())
                     .map(PaymentMethod::getTitle).orElse("Desconhecido");
-            String formattedDate = order.getcreationDate() != null
-                    ? order.getcreationDate().format(DATE_FORMATTER) : "";
+            String formattedDate = order.getCreationDate() != null
+                    ? order.getCreationDate().format(DATE_FORMATTER) : "";
 
             return new OrderResponseDTO(
                     order.getId(),
