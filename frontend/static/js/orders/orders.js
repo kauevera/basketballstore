@@ -140,13 +140,13 @@ async function cancelOrder(orderId) {
 
         if (!response.ok) {
             const msg = await response.text();
-            alert("Erro: " + msg);
+            showToast("Erro: " + msg);
             return;
         }
 
         await loadOrders();
     } catch {
-        alert("Erro ao cancelar pedido.");
+        showToast("Erro ao cancelar pedido.");
     }
 }
 
@@ -161,13 +161,13 @@ async function confirmPayment() {
 
         if (!response.ok) {
             const msg = await response.text();
-            alert("Erro: " + msg);
+            showToast("Erro: " + msg);
             return;
         }
 
         closePaymentModal();
         await loadOrders();
     } catch {
-        alert("Erro ao processar pagamento.");
+        showToast("Erro ao processar pagamento.");
     }
 }

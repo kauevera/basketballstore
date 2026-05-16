@@ -245,7 +245,7 @@ function toggleCart() {
 
 function openPaymentFromCart() {
     if (getCart().length === 0) {
-        alert("O carrinho est\u00E1 vazio.");
+        showToast("O carrinho est\u00E1 vazio.", 'info');
         return;
     }
     orderContext = "cart";
@@ -279,7 +279,7 @@ function closePaymentModal() {
 async function confirmOrder() {
     const selected = document.querySelector('input[name="payment"]:checked');
     if (!selected) {
-        alert("Selecione uma forma de pagamento.");
+        showToast("Selecione uma forma de pagamento.", 'info');
         return;
     }
 
@@ -297,9 +297,9 @@ async function confirmOrder() {
         }
 
         closePaymentModal();
-        alert("Pedido realizado com sucesso!");
+        showToast("Pedido realizado com sucesso!", 'success');
     } catch (error) {
-        alert("Erro ao realizar pedido: " + error.message);
+        showToast("Erro ao realizar pedido: " + error.message);
     }
 }
 

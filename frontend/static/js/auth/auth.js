@@ -63,8 +63,13 @@ function updatePasswordStrength() {
 }
 
 async function login() {
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        showToast("Preencha todos os campos.");
+        return;
+    }
 
     try {
         const response = await fetch(`${API_BASE_URL}/users/login`, {
@@ -75,7 +80,7 @@ async function login() {
 
         if (!response.ok) {
             const message = await response.text();
-            alert(message);
+            showToast(message);
             return;
         }
 
@@ -85,17 +90,33 @@ async function login() {
         localStorage.setItem("userEmail", data.email);
         redirectDashboard();
     } catch (error) {
-        alert("Erro ao conectar com o servidor.");
+        showToast("Erro ao conectar com o servidor.");
     }
 }
 
 async function register() {
-    const name = document.getElementById("name").value;
+    const name = document.getElementById("name").value.trim();
     const age = parseInt(document.getElementById("age").value);
     const gender = document.getElementById("gender").value;
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!name || !age || !gender || !email || !password || !confirmPassword) {
+        showToast("Preencha todos os campos.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        showToast("As senhas não coincidem.");
+        return;
+    }
+
+    const strength = getPasswordStrength(password);
+    if (strength.label === 'Muito fraca' || strength.label === 'Fraca') {
+        showToast("A senha é muito fraca. Use ao menos 8 caracteres com letras maiúsculas, números ou símbolos.");
+        return;
+    }
 
     try {
         const response = await fetch(`${API_BASE_URL}/users/register`, {
@@ -106,7 +127,7 @@ async function register() {
 
         if (!response.ok) {
             const message = await response.text();
-            alert(message);
+            showToast(message);
             return;
         }
 
@@ -116,7 +137,7 @@ async function register() {
         localStorage.setItem("userEmail", data.email);
         redirectDashboard();
     } catch (error) {
-        alert("Erro ao conectar com o servidor.");
+        showToast("Erro ao conectar com o servidor.");
     }
 }
 
