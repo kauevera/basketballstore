@@ -8,6 +8,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/basketballstore.db
       - TZ=UTC
+      - JWT_SECRET=${JWT_SECRET:-basketballstore-secret-key-must-be-at-least-256-bits-long-for-hmac}
     restart: unless-stopped
 
   frontend:
